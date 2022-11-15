@@ -1,0 +1,21 @@
+<h1>{{ workout.workout_name }}</h1>
+<ul>
+    {% for exercise in workout.exercise_set.all %}
+    <div class ="list-group mb-3">
+        <li class="list-group-item list-group-item-action">{{exercise.movement}}<br>
+            Sets: {{exercise.sets}} Reps: {{exercise.reps}}  </li>
+            
+            <form action="{% url 'workout:delete_exercise' exercise.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Delete Exercise">
+            </form>
+    </div>
+    {% endfor %}
+
+</ul>
+
+<form name="exerciseForm" action="" method="post">
+    {% csrf_token %}
+    {{ exerciseform }}
+    <input type="submit" value="Add Exercise">
+</form>

@@ -1,0 +1,19 @@
+{% if workouts %}
+    <ul>
+    {% for workout in workouts %}
+        <li><a href="{% url 'workout:exercise_detail' workout.id %}">{{ workout.workout_name }}  </a> {{ workout.workout_date }}</li>
+        <form action="{% url 'workout:delete_workout' workout.id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Delete Workout">
+        </form>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No workouts are available.</p>
+{% endif %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ workoutform }}
+    <input type="submit" value="Add Workout">
+</form>
