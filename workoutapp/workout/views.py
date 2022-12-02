@@ -1,9 +1,12 @@
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views import View
 from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic import ListView, DetailView
+import json
+from django.core import serializers
 
 from workout.forms import ExerciseForm, WorkoutForm
 from workout.models import Exercise, Workout
@@ -57,6 +60,7 @@ class ExerciseDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['exerciseform'] = ExerciseForm(initial={'workout': self.object})
+        context
         return context
 
 # Creates and processes Exercise Form
